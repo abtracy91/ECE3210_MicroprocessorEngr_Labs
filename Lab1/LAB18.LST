@@ -1,0 +1,125 @@
+Turbo Assembler	 Version 4.1	    02/09/12 12:49:25	    Page 1
+lab18.asm
+
+
+
+      1				     ;PROGRAM 3	OF LAB 1
+      2				     ;FILENAME:	Lab1c.asm
+      3				     ;FILE FORMAT: EXE
+      4
+      5	0000			     .MODEL MEDIUM
+      6	0000			     .STACK 100H
+      7
+      8	0000			     .DATA
+      9	0000  45 43 45 34 32 37	30+  MESSAGE	     DB	     'ECE4270 LAB1', 0DH, 0AH
+     10	      20 4C 41 42 31 0D	0A
+     11	000E  45 4E 54 45 52 20	41+  MESS2	     DB	     'ENTER A CHARACTER	FROM KEYBORD: $'
+     12	      20 43 48 41 52 41	43+
+     13	      54 45 52 20 46 52	4F+
+     14	      4D 20 4B 45 59 42	4F+
+     15	      52 44 3A 20 24
+     16	002F  0D 0A 54 48 45 20	43+  OUTMSG	     DB	     0DH,0AH,'THE CHARACTER YOU	JUST ENTERED IS	$'
+     17	      48 41 52 41 43 54	45+
+     18	      52 20 59 4F 55 20	4A+
+     19	      55 53 54 20 45 4E	54+
+     20	      45 52 45 44 20 49	53+
+     21	      20 24
+     22	0054  ??		     INCHAR DB ?
+     23	0055  0D 0A 24		     NEWLINE DB	0DH,0AH,'$'
+     24	0058  ?? ?? 20 49 53 20	54+  messaged	     DB	     ?,?,' IS THE ADDRESS',0DH,0AH,'$'
+     25	      48 45 20 41 44 44	52+
+     26	      45 53 53 0D 0A 24
+     27	006C  10		     VAR	     DB	     10h
+     28
+     29	006D			     .CODE
+     30				     .STARTUP ;INITIALIZE THE PROGRAM
+1    31	0000			     @Startup:
+1    32	0000  BA 0000s			     MOV     DX,@data
+1    33	0003  8E DA			     MOV     DS,DX
+1    34	0005  8C D3			     MOV     BX,SS
+1    35	0007  2B DA			     SUB     BX,DX
+1    36	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     37	      E3
+1    38	0011  FA			     CLI
+1    39	0012  8E D2			     MOV     SS,DX
+1    40	0014  03 E3			     ADD     SP,BX
+1    41	0016  FB			     STI
+     42
+     43	0017			     MAIN PROC FAR
+     44	0017  BA 0000r			     LEA DX,MESSAGE ;PRINT MESSAGE
+     45	001A  B4 09			     MOV AH,9
+     46	001C  CD 21			     INT 21H
+     47	001E  B4 01			     MOV AH,1 ;READ A CHARACTER	FROM KEYBOARD
+     48	0020  CD 21			     INT 21H
+     49	0022  A2 0054r			     MOV INCHAR,AL
+     50	0025  BA 002Fr			     LEA DX,OUTMSG ;PRINT A MESSAGE
+     51	0028  B4 09			     MOV AH,9
+     52	002A  CD 21			     INT 21H
+     53	002C  8A 16 0054r		     MOV DL,INCHAR ;OUTPUT A CHARACTER TO THE SCREEN
+     54	0030  B4 02			     MOV AH,2
+     55	0032  CD 21			     INT 21H
+     56	0034  BA 0055r			     MOV DX,OFFSET NEWLINE
+     57	0037  B4 09			     MOV AH,9 ;MOVE CURSOR TO NEXT LINE
+Turbo Assembler	 Version 4.1	    02/09/12 12:49:25	    Page 2
+lab18.asm
+
+
+
+     58	0039  CD 21			     INT 21H
+     59
+     60					     ; record address
+     61	003B  BA 0054r			     lea dx, inchar
+     62					     ;add dx, 3030h
+     63	003E  88 36 0058r		     mov messaged, dh
+     64	0042  88 16 0059r		     mov messaged + 1, dl
+     65	0046  BA 0058r			     lea dx, messaged
+     66	0049  B4 09			     mov ah, 9
+     67	004B  CD 21			     int 21h
+     68
+     69
+     70				     .EXIT
+1    71	004D  B4 4C			     MOV     AH,4Ch
+1    72	004F  CD 21			     INT     21h
+     73	0051			     MAIN ENDP
+     74				     END
+Turbo Assembler	 Version 4.1	    02/09/12 12:49:25	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/09/12"
+??FILENAME			  Text	 "lab18	  "
+??TIME				  Text	 "12:49:25"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 LAB18_TEXT
+@CODESIZE			  Text	 1
+@CPU				  Text	 0101H
+@CURSEG				  Text	 LAB18_TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB18
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 4
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 LAB18_TEXT:0000
+@WORDSIZE			  Text	 2
+INCHAR				  Byte	 DGROUP:0054
+MAIN				  Far	 LAB18_TEXT:0017
+MESS2				  Byte	 DGROUP:000E
+MESSAGE				  Byte	 DGROUP:0000
+MESSAGED			  Byte	 DGROUP:0058
+NEWLINE				  Byte	 DGROUP:0055
+OUTMSG				  Byte	 DGROUP:002F
+VAR				  Byte	 DGROUP:006C
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  006D Word	  Public  DATA
+LAB18_TEXT			  16  0051 Word	  Public  CODE
+

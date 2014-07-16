@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>currentDocument</key>
+	<string>lab4.asm</string>
+	<key>documents</key>
+	<array>
+		<dict>
+			<key>filename</key>
+			<string>lab4.asm</string>
+			<key>lastUsed</key>
+			<date>2012-03-23T03:46:09Z</date>
+			<key>selected</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>lab4.mac</string>
+			<key>lastUsed</key>
+			<date>2012-03-23T03:46:09Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>../Lab3/lab3.mac</string>
+			<key>lastUsed</key>
+			<date>2012-03-22T17:05:12Z</date>
+		</dict>
+	</array>
+	<key>fileHierarchyDrawerWidth</key>
+	<integer>114</integer>
+	<key>metaData</key>
+	<dict>
+		<key>lab4.asm</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>4</integer>
+				<key>line</key>
+				<integer>490</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>lab4.mac</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>50</integer>
+				<key>line</key>
+				<integer>22</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>openDocuments</key>
+	<array>
+		<string>lab4.asm</string>
+		<string>lab4.mac</string>
+	</array>
+	<key>showFileHierarchyDrawer</key>
+	<true/>
+	<key>windowFrame</key>
+	<string>{{22, 1}, {730, 777}}</string>
+</dict>
+</plist>

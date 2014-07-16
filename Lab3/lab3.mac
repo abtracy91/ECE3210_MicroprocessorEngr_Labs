@@ -1,0 +1,80 @@
+incahdx macro
+	; inc 24bit number ah, bx
+	
+	;inc dx
+	add dx, 1
+	adc ah, 0
+endm
+
+
+print_str macro msg
+	; prints the msg string (BUFFER) to output.
+
+	push ax
+	push dx
+	
+	; 09 h : dos interrupt to print string
+	mov ah, 09h 
+	lea dx, msg + 2		; skips the first 2 bytes because the first is the size of the buffer
+						; 	and the 2nd is the length of the string
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+print_str_2 macro msg
+	; modified print_str
+	; this macro is used to print messages that are NOT buffers.
+	
+	push ax
+	push dx
+	
+	; 09 h : dos interrupt to print string
+	mov ah, 09h 
+	lea dx, msg
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+read_str macro var
+	; reads in a string and stores it in memory at location var.
+	
+	push ax
+	push dx
+	
+	; 0Ch : flush buffer and read standard input
+	; 0Ah : buffered input
+	mov ah, 0ah
+	;mov al, 0ah
+	lea dx, var
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+getC macro mychar
+	; read in a character from keyboard and stores
+	; it in al register.
+	
+	mov ah, 01h
+	int 21h
+endm
+
+printC macro mychar
+	; prints the character mychar
+	
+	push ax
+	push dx
+	
+	; 02h : dos interrupt to print char
+	mov ah, 02h
+	mov dl, mychar
+	int 21h
+	
+	pop dx
+	pop ax
+endm

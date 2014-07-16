@@ -1,0 +1,99 @@
+Turbo Assembler	 Version 4.1	    02/09/12 12:23:30	    Page 1
+lab1c.asm
+
+
+
+      1				     ;PROGRAM 3	OF LAB 1
+      2				     ;FILENAME:	Lab1c.asm
+      3				     ;FILE FORMAT: EXE
+      4	0000			     .MODEL MEDIUM
+      5	0000			     .STACK 100H
+      6	0000			     .DATA
+      7	0000  45 43 45 34 32 37	30+  MESSAGE DB	'ECE4270 LAB1',0DH,0AH
+      8	      20 4C 41 42 31 0D	0A
+      9	000E  45 4E 54 45 52 20	41+  MESS2 DB 'ENTER A CHARACTER FROM KEYBORD: $'
+     10	      20 43 48 41 52 41	43+
+     11	      54 45 52 20 46 52	4F+
+     12	      4D 20 4B 45 59 42	4F+
+     13	      52 44 3A 20 24
+     14	002F  0D 0A 54 48 45 20	43+  OUTMSG DB 0DH,0AH,'THE CHARACTER YOU JUST ENTERED IS $'
+     15	      48 41 52 41 43 54	45+
+     16	      52 20 59 4F 55 20	4A+
+     17	      55 53 54 20 45 4E	54+
+     18	      45 52 45 44 20 49	53+
+     19	      20 24
+     20	0054  ??		     INCHAR DB ?
+     21	0055  0D 0A 24		     NEWLINE DB	0DH,0AH,'$'
+     22	0058			     .CODE
+     23				     .STARTUP ;INITIALIZE THE PROGRAM
+1    24	0000			     @Startup:
+1    25	0000  BA 0000s			     MOV     DX,@data
+1    26	0003  8E DA			     MOV     DS,DX
+1    27	0005  8C D3			     MOV     BX,SS
+1    28	0007  2B DA			     SUB     BX,DX
+1    29	0009  D1 E3 D1 E3 D1 E3	D1+	     SHL     BX,4
+     30	      E3
+1    31	0011  FA			     CLI
+1    32	0012  8E D2			     MOV     SS,DX
+1    33	0014  03 E3			     ADD     SP,BX
+1    34	0016  FB			     STI
+     35	0017			     MAIN PROC FAR
+     36	0017  BA 0000r		     LEA DX,MESSAGE ;PRINT MESSAGE
+     37	001A  B4 09		     MOV AH,9
+     38	001C  CD 21		     INT 21H
+     39	001E  B4 01		     MOV AH,1 ;READ A CHARACTER	FROM KEYBOARD
+     40	0020  CD 21		     INT 21H
+     41	0022  A2 0054r		     MOV INCHAR,AL
+     42	0025  BA 002Fr		     LEA DX,OUTMSG ;PRINT A MESSAGE
+     43	0028  B4 09		     MOV AH,9
+     44	002A  CD 21		     INT 21H
+     45	002C  8A 16 0054r	     MOV DL,INCHAR ;OUTPUT A CHARACTER TO THE SCREEN
+     46	0030  B4 02		     MOV AH,2
+     47	0032  CD 21		     INT 21H
+     48	0034  BA 0055r		     MOV DX,OFFSET NEWLINE
+     49	0037  B4 09		     MOV AH,9 ;MOVE CURSOR TO NEXT LINE
+     50	0039  CD 21		     INT 21H
+     51				     .EXIT
+1    52	003B  B4 4C			     MOV     AH,4Ch
+1    53	003D  CD 21			     INT     21h
+     54	003F			     MAIN ENDP
+     55				     END
+Turbo Assembler	 Version 4.1	    02/09/12 12:23:30	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/09/12"
+??FILENAME			  Text	 "lab1c	  "
+??TIME				  Text	 "12:23:30"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 LAB1C_TEXT
+@CODESIZE			  Text	 1
+@CPU				  Text	 0101H
+@CURSEG				  Text	 LAB1C_TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB1C
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 4
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 LAB1C_TEXT:0000
+@WORDSIZE			  Text	 2
+INCHAR				  Byte	 DGROUP:0054
+MAIN				  Far	 LAB1C_TEXT:0017
+MESS2				  Byte	 DGROUP:000E
+MESSAGE				  Byte	 DGROUP:0000
+NEWLINE				  Byte	 DGROUP:0055
+OUTMSG				  Byte	 DGROUP:002F
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  0058 Word	  Public  DATA
+LAB1C_TEXT			  16  003F Word	  Public  CODE
+

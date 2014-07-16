@@ -1,0 +1,47 @@
+printString macro msg
+	; prints the string referenced by msg to output.
+
+	push ax
+	push dx
+	
+	; 09 h : dos interrupt to print string
+	mov ah, 09h 
+	lea dx, msg
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+readChar macro
+	; read in a character from keyboard and stores
+	; it in al register.
+	
+	mov ah, 01h
+	int 21h
+endm
+
+printChar macro mychar
+	; prints the character mychar
+	
+	push ax
+	push dx
+	
+	; 02h : dos interrupt to print char
+	mov ah, 02h
+	mov dl, mychar
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+incahdx macro
+	; from lab3
+	
+	; inc 24bit number ah, bx
+	
+	;inc dx
+	add dx, 1
+	adc ah, 0
+endm

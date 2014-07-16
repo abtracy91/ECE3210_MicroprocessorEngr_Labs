@@ -1,0 +1,39 @@
+setCursor macro x, y
+	; sets the cursor position to column: x and row: y
+	
+	push ax
+	push dx
+	
+	mov ah, 02h
+	mov dh, y
+	mov dl, x
+	int 10h
+	
+	pop dx
+	pop ax
+endm
+
+setVector macro intV, mem
+	; sets unterrupt vector intV to memory location mem
+	
+	mov ah, 25h
+	mov al, intV
+	lea dx, mem
+	int 21h
+endm
+
+getVector macro intV, mem
+	; gets the interrupt vector intV and saves it to memory location mem
+	
+	mov ah, 35h
+	mov al, intV
+	int 21h
+	mov mem, bx
+endm
+
+getClock macro
+	; gets the clock tick
+	
+	mov ah, 0h
+	int 1ah
+endm

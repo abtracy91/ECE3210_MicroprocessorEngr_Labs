@@ -1,0 +1,23 @@
+print_str macro msg
+	; prints the msg string to output.
+
+	push ax
+	push dx
+	
+	; 09 h : dos interrupt to print string
+	mov ah, 09h 
+	lea dx, msg
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+read_char macro 
+	; read in a character from keyboard and stores
+	; it in al register.
+	
+	mov ah, 01h
+	int 21h
+
+endm

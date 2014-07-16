@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>documents</key>
+	<array>
+		<dict>
+			<key>filename</key>
+			<string>dos.mac</string>
+			<key>lastUsed</key>
+			<date>2012-04-10T17:29:47Z</date>
+			<key>selected</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>lab5tsr.asm</string>
+			<key>lastUsed</key>
+			<date>2012-04-10T17:29:46Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>lab5.asm</string>
+			<key>lastUsed</key>
+			<date>2012-04-10T17:29:46Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>bios.mac</string>
+			<key>lastUsed</key>
+			<date>2012-04-10T17:29:46Z</date>
+		</dict>
+	</array>
+	<key>fileHierarchyDrawerWidth</key>
+	<integer>165</integer>
+	<key>metaData</key>
+	<dict/>
+	<key>showFileHierarchyDrawer</key>
+	<true/>
+	<key>windowFrame</key>
+	<string>{{7, 1}, {730, 777}}</string>
+</dict>
+</plist>

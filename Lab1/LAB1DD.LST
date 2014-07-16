@@ -1,0 +1,74 @@
+Turbo Assembler	 Version 4.1	    02/09/12 12:52:47	    Page 1
+lab1dd.asm
+
+
+
+      1				     ;PROGRAM 4	OF LAB 1
+      2				     ;FILENAME:	Lab1d.asm
+      3				     ;FILE FORMAT: EXE
+      4	0000			     .MODEL tiny
+      5	0000			     .STACK 100
+      6	0000			     .DATA
+      7	0000  ?? ?? 20 49 53 20	54+  MESSAGE DB	?,?,' IS THE ADDRESS',0DH,0AH,'$'
+      8	      48 45 20 41 44 44	52+
+      9	      45 53 53 0D 0A 24
+     10	0014  10		     VAR DB 10h
+     11	0015			     .CODE
+     12	0000			     MAIN PROC FAR
+     13				     .STARTUP
+1    14	0100			     @Startup:
+     15
+     16				     ; garbage
+     17	0100  8B C3		     mov ax, bx
+     18	0102  8B CA		     mov cx, dx
+     19	0104  8A E2		     mov ah, dl
+     20	0106  8A CC		     mov cl, ah
+     21
+     22	0108  BA 0014r		     LEA DX,VAR	;LOAD ADDRESS
+     23	010B  81 C2 3030	     ADD DX,3030h ;CONVERT TO ASCII
+     24	010F  88 36 0000r	     MOV MESSAGE, DH ;STORE ADDRESS
+     25	0113  88 16 0001r	     MOV MESSAGE + 1, DL ;STORE	ADDRESS
+     26	0117  BA 0000r		     LEA DX,MESSAGE ;PREPARE FOR PRINT
+     27	011A  B4 09		     MOV AH,9 ;SPECIFY PRINT STRING FUNCTION
+     28	011C  CD 21		     INT 21H ;CALL DOS
+     29				     .EXIT
+1    30	011E  B4 4C			     MOV     AH,4Ch
+1    31	0120  CD 21			     INT     21h
+     32	0122			     MAIN ENDP
+     33				     END
+Turbo Assembler	 Version 4.1	    02/09/12 12:52:47	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/09/12"
+??FILENAME			  Text	 "lab1dd  "
+??TIME				  Text	 "12:52:47"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 DGROUP
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB1DD
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 1
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 DGROUP:0100
+@WORDSIZE			  Text	 2
+MAIN				  Far	 DGROUP:0000
+MESSAGE				  Byte	 DGROUP:0000
+VAR				  Byte	 DGROUP:0014
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0064 Para	  Stack	  STACK
+  _DATA				  16  0015 Word	  Public  DATA
+  _TEXT				  16  0122 Word	  Public  CODE
+

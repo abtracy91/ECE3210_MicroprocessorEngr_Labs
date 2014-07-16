@@ -1,0 +1,178 @@
+ 
+; lab4.mac
+; Alexander Tracy
+
+openFile macro file
+    
+    mov ah, 3dh     ; 3dh: open file
+    mov al, 02h		; file access mode for reading and writing
+    lea dx, file    ; loads file (file: points to filename in ds) into dx
+    int 21h
+    
+    jc end_openFile
+	
+	; this block of code moves the fileHandle into memory from ax
+	mov fileHandle, ax
+	
+    end_openFile:
+    
+endm
+
+openFile2 macro file
+	; same as openFile
+	; 2nd macro is needed to prevent duplicate labels
+    
+    mov ah, 3dh     ; 3dh: open file
+    mov al, 02h		; file access mode for reading and writing
+    lea dx, file    ; loads file (file: points to filename in ds) into dx
+    int 21h
+    
+    jc end_openFile2
+	
+	; this block of code moves the fileHandle into memory from ax
+	mov fileHandle, ax
+	
+    end_openFile2:
+    
+endm
+
+createFile macro file
+	
+	mov cx, 0			; file attributes
+	mov ah, 3ch			; 3ch: create file
+	mov al, 02h			; file access mode for r/w
+	lea dx, file		; loads file (file: points to filename in ds) into dx
+	int 21h
+	
+	jc end_createFile
+	
+	; this block of code moves the fileHandle into memory from ax
+	push bx
+	mov bx, fileHandle
+	mov [bx], ax
+	pop bx
+	
+	end_createFile:
+	
+endm
+
+createFile2 macro file
+	; same as createFile
+	; 2nd macro is needed to prevent duplicate labels
+	
+	mov cx, 0			; file attributes
+	mov ah, 3ch			; 3ch: create file
+	mov al, 02h			; file access mode for r/w
+	lea dx, file		; loads file (file: points to filename in ds) into dx
+	int 21h
+	
+	jc end_createFile2
+	
+	; this block of code moves the fileHandle into memory from ax
+	push bx
+	mov bx, fileHandle
+	mov [bx], ax
+	pop bx
+	
+	end_createFile2:
+	
+endm
+
+readFile macro fileHandle
+
+	mov ah, 3fh						; 3fh: read file
+	mov bx, fileHandle				; bx contains fileHandle
+	mov cx, 400						; cl: length of string to read
+	lea dx, list					; dx: location we are reading to
+	int 21h
+	
+	;jc error
+endm
+
+writeFile macro fileHandle
+	mov ah, 40h
+	mov bx, fileHandle
+	mov cx, 400
+	lea dx, list
+	int 21h
+
+
+
+
+endm
+
+closeFile macro fileHandle
+	
+	mov bx, fileHandle
+	mov ah, 3eh
+	int 21h
+	;jc error
+
+
+endm
+
+cleartempvar macro msg
+	mov msg[0], '0'
+	mov msg[1], '0'
+	mov msg[2], '0'
+	mov msg[3], '0'
+	mov msg[4], '0'
+	mov msg[5], '0'
+	mov msg[6], '0'
+	mov msg[7], '0'
+endm
+
+printString macro msg
+	; prints the string referenced by msg to output.
+
+	push ax
+	push dx
+	
+	; 09 h : dos interrupt to print string
+	mov ah, 09h 
+	lea dx, msg
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+readString macro var
+	; reads in a string and stores it in memory at location var.
+	
+	push ax
+	push dx
+	
+	; 0Ch : flush buffer and read standard input
+	; 0Ah : buffered input
+	mov ah, 0ah
+	;mov al, 0ah
+	lea dx, var
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+printChar macro mychar
+	; prints the character mychar
+	
+	push ax
+	push dx
+	
+	; 02h : dos interrupt to print char
+	mov ah, 02h
+	mov dl, mychar
+	int 21h
+	
+	pop dx
+	pop ax
+endm
+
+readChar macro
+	; read in a character from keyboard and stores
+	; it in al register.
+	
+	mov ah, 01h
+	int 21h
+endm

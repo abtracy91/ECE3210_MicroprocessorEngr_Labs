@@ -1,0 +1,59 @@
+Turbo Assembler	 Version 4.1	    02/09/12 12:35:23	    Page 1
+lab16.asm
+
+
+
+      1				     ; program 1 of lab	1
+      2				     ; lab1a.asm
+      3				     ; .com
+      4
+      5	0000			     .model tiny
+      6
+      7	0000			     .data
+      8
+      9
+     10	0000			     .code
+     11				     .startup
+1    12	0100			     @Startup:
+     13	0100  B8 3202			     mov ax, 3202h
+     14	0103  8A D8			     mov bl, al
+     15	0105  8B C8			     mov cx, ax
+     16	0107  8A D5			     mov dl, ch
+     17	0109  CD 21			     int 21h
+     18
+     19				     .exit
+1    20	010B  B4 4C			     MOV     AH,4Ch
+1    21	010D  CD 21			     INT     21h
+     22				     end
+Turbo Assembler	 Version 4.1	    02/09/12 12:35:23	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/09/12"
+??FILENAME			  Text	 "lab16	  "
+??TIME				  Text	 "12:35:23"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 DGROUP
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB16
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 1
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 DGROUP:0100
+@WORDSIZE			  Text	 2
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  _DATA				  16  0000 Word	  Public  DATA
+  _TEXT				  16  010F Word	  Public  CODE
+

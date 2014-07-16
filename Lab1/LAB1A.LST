@@ -1,0 +1,88 @@
+Turbo Assembler	 Version 4.1	    02/09/12 12:11:29	    Page 1
+lab1a.asm
+
+
+
+      1				     ; program 1 of lab	1
+      2				     ; lab1a.asm
+      3				     ; .com
+      4
+      5	0000			     .model tiny
+      6
+      7	0000			     .data
+      8	0000  45 43 45 34 32 37	30+  message	     db	     'ECE4270 LAB1', 0dh, 0ah
+      9	      20 4C 41 42 31 0D	0A
+     10	000E  45 4E 54 45 52 20	41+  mess2	     db	     'ENTER A CHARACTER	FROM KEYBOARD: $'
+     11	      20 43 48 41 52 41	43+
+     12	      54 45 52 20 46 52	4F+
+     13	      4D 20 4B 45 59 42	4F+
+     14	      41 52 44 3A 20 24
+     15	0030  0D 0A 54 48 45 20	43+  outmsg	     db	     0dh, 0ah, 'THE CHARACTER YOU JUST ENTERED IS $'
+     16	      48 41 52 41 43 54	45+
+     17	      52 20 59 4F 55 20	4A+
+     18	      55 53 54 20 45 4E	54+
+     19	      45 52 45 44 20 49	53+
+     20	      20 24
+     21	0055  ??		     inchar	     db	     ?
+     22	0056  0D 0A 24		     newline	     db	     0dh, 0ah, '$'
+     23
+     24	0059			     .code
+     25				     .startup
+1    26	0100			     @Startup:
+     27	0100  BA 0000r			     lea dx, message
+     28	0103  B4 09			     mov ah, 9
+     29	0105  CD 21			     int 21h
+     30	0107  B4 01			     mov ah, 1
+     31	0109  CD 21			     int 21h
+     32	010B  A2 0055r			     mov inchar, al
+     33	010E  BA 0030r			     lea dx, outmsg
+     34	0111  B4 09			     mov ah, 9
+     35	0113  CD 21			     int 21h
+     36	0115  8A 16 0055r		     mov dl, inchar
+     37	0119  B4 02			     mov ah, 2
+     38	011B  CD 21			     int 21h
+     39	011D  BA 0056r			     lea dx, newline
+     40	0120  B4 09			     mov ah, 9
+     41	0122  CD 21			     int 21h
+     42
+     43				     .exit
+1    44	0124  B4 4C			     MOV     AH,4Ch
+1    45	0126  CD 21			     INT     21h
+     46				     end
+Turbo Assembler	 Version 4.1	    02/09/12 12:11:29	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "02/09/12"
+??FILENAME			  Text	 "lab1a	  "
+??TIME				  Text	 "12:11:29"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 DGROUP
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 LAB1A
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 1
+@STACK				  Text	 DGROUP
+@STARTUP			  Near	 DGROUP:0100
+@WORDSIZE			  Text	 2
+INCHAR				  Byte	 DGROUP:0055
+MESS2				  Byte	 DGROUP:000E
+MESSAGE				  Byte	 DGROUP:0000
+NEWLINE				  Byte	 DGROUP:0056
+OUTMSG				  Byte	 DGROUP:0030
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  _DATA				  16  0059 Word	  Public  DATA
+  _TEXT				  16  0128 Word	  Public  CODE
+
